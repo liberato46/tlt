@@ -5,4 +5,4 @@ tourism language test poc
 
 To install this project with: 
 
-$ pip3 install -r requirements.txt
+	$ pip3 install -r requirements.txt
