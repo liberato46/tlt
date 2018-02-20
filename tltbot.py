@@ -13,11 +13,11 @@ env=os.environ.get("ENV", "development")
 if env=="development":
 	dotenv_path=join(dirname(__file__), ".env")
 	load_dotenv(dotenv_path,verbose=True)
-token=os.environ.get("TOKEN")
+TOKEN=os.environ.get("TOKEN")
 
-updater = Updater(token=token)
+updater=Updater(token=TOKEN)
 
-dispatcher = updater.dispatcher
+dispatcher=updater.dispatcher
 try:
 	def start(bot, update):
 		print(update.message.chat_id)
