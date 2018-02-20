@@ -27,11 +27,13 @@ try:
 		bot.send_message(chat_id=update.message.chat_id, text=welcome_message,reply_markup=reply_markup)
 
 	def echo(bot, update):
+		print(update.message.text)
 		text="What do you mean by \""+update.message.text+"\" ?"
 		bot.send_message(chat_id=update.message.chat_id, text=text)
 
 	def contact(bot, update):
 		phone=update.message.contact.phone_number
+		print(phone)
 		text="Welcome, "+contacts_list[phone]+"!"
 		reply_markup=telegram.ReplyKeyboardRemove()
 		bot.send_message(chat_id=update.message.chat_id, text=text, reply_markup=reply_markup)
