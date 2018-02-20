@@ -58,7 +58,7 @@ try:
 		PORT=int(os.environ.get("PORT"))
 		HEROKU_APP=os.environ.get("HEROKU_APP")
 		updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
-		updater.bot.start_webhook("https://"+HEROKU_APP+".herokuapp.com/"+TOKEN)
+		updater.bot.set_webhook("https://"+HEROKU_APP+".herokuapp.com/"+TOKEN)
 		updater.idle()
 	else:
 		updater.start_polling()
