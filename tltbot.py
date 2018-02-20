@@ -9,9 +9,10 @@ from welcome import welcome_message
 import telegram 
 from telegram import KeyboardButton,ReplyKeyboardMarkup
 from contacts import contacts_list
-
-dotenv_path=join(dirname(__file__), ".env")
-load_dotenv(dotenv_path,verbose=True)
+env=os.environ.get("ENV", "development")
+if env=="development":
+	dotenv_path=join(dirname(__file__), ".env")
+	load_dotenv(dotenv_path,verbose=True)
 token=os.environ.get("TOKEN")
 
 updater = Updater(token=token)
@@ -53,6 +54,13 @@ try:
 	voice_handler = MessageHandler(Filters.voice, voice)
 	dispatcher.add_handler(voice_handler)
 
-	updater.start_polling()
+	if env=="production":
+		PORT=int(os.environ.get("PORT"))
+		HEROKU_APP=os.environ.get("HEROKU_APP")
+		updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
+		updater.bot.start_webhook("https://"+HEROKU_APP+".herokuapp.com/"+TOKEN)
+		updater.idle()
+	else:
+		updater.start_polling()
 except Exception as e:
 	print(e)
