@@ -1,2 +1,4 @@
 python-dotenv==0.7.1
 python-telegram-bot==9.0.0
+requests==2.18.4
+boto==1.5.3
