@@ -6,6 +6,8 @@ import os
 import requests
 import json
 import bucket
+import datetime
+
 from os.path import join,dirname
 from dotenv import load_dotenv
 from welcome import welcome_message
@@ -52,7 +54,7 @@ try:
 		voice_file.download(voice_path)
 		s3_url=bucket.upload_s3(voice_path, voice_id)
 		text="Voice received"
-		payload={"message":{"username":update.message.from_user.id, "text":s3_url}}
+		payload={"message":{"username":update.message.from_user.id, "text":s3_url, "timestamp":datetime.datetime.now().isoformat()}}
 		url="https://hooks.zapier.com/hooks/catch/2980782/zgadqb"
 		requests.post(url, data=json.dumps(payload))
 		bot.send_message(chat_id=update.message.chat_id, text=text)
