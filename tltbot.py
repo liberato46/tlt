@@ -7,6 +7,7 @@ import requests
 import json
 import bucket
 import datetime
+import airtable_wrapper
 
 from os.path import join,dirname
 from dotenv import load_dotenv
@@ -24,11 +25,14 @@ updater=Updater(token=TOKEN)
 
 dispatcher=updater.dispatcher
 try:
+	def sound(bot, update):
+		bot.send_voice(chat_id=update.message.chat_id, voice=open("tlt_audios/TLT_v5_1_question1_v1.ogg", "rb"))
+
 	def start(bot, update):
 		print(update.message.chat_id)
 		contact_keyboard=KeyboardButton(text="Send my phone number",request_contact=True)
 		custom_keyboard=[[contact_keyboard]]
-		reply_markup=ReplyKeyboardMarkup(custom_keyboard)
+		reply_markup=ReplyKeyboardMarkup(custom_keyboard, resize_keyboard=True)
 		bot.send_message(chat_id=update.message.chat_id, text=welcome_message,reply_markup=reply_markup)
 
 	def echo(bot, update):
@@ -41,10 +45,16 @@ try:
 
 	def contact(bot, update):
 		phone=update.message.contact.phone_number
+		user_id=update.message.from_user.id
+		text=airtable_wrapper.associate(phone, user_id)
 		print(phone)
-		text="Welcome, "+contacts_list[phone]+"!"
 		reply_markup=telegram.ReplyKeyboardRemove()
 		bot.send_message(chat_id=update.message.chat_id, text=text, reply_markup=reply_markup)
+		bot.send_message(chat_id=update.message.chat_id, text="(1) Click on \"Play\" to listen to the test instructions")
+		bot.send_voice(chat_id=update.message.chat_id, voice=open("tlt_audios/TLT_v5_1_intro_v1.ogg", "rb"))
+		bot.send_message(chat_id=update.message.chat_id, text="(2) Now click on \"Play\" to listen to Question 1")
+		bot.send_voice(chat_id=update.message.chat_id, voice=open("tlt_audios/TLT_v5_1_question1_v1.ogg", "rb"))
+		bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
 
 	def voice(bot, update):
 		voice_id=update.message.voice.file_id
@@ -53,11 +63,8 @@ try:
 		print(voice_path)
 		voice_file.download(voice_path)
 		s3_url=bucket.upload_s3(voice_path, voice_id)
-		text="Voice received"
-		payload={"message":{"username":update.message.from_user.id, "text":s3_url, "timestamp":datetime.datetime.now().isoformat()}}
-		url="https://hooks.zapier.com/hooks/catch/2980782/zgadqb"
-		requests.post(url, data=json.dumps(payload))
-		bot.send_message(chat_id=update.message.chat_id, text=text)
+		question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
+		bot.send_message(chat_id=update.message.chat_id, text="question "+str(question_answered)+" answered")
 
 	echo_handler = MessageHandler(Filters.text, echo)
 	dispatcher.add_handler(echo_handler)
@@ -70,6 +77,9 @@ try:
 
 	voice_handler = MessageHandler(Filters.voice, voice)
 	dispatcher.add_handler(voice_handler)
+
+	sound_handler = CommandHandler('sound', sound)
+	dispatcher.add_handler(sound_handler)
 
 	if env=="production":
 		PORT=int(os.environ.get("PORT"))
