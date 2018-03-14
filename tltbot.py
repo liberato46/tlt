@@ -65,6 +65,12 @@ try:
 		s3_url=bucket.upload_s3(voice_path, voice_id)
 		question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
 		bot.send_message(chat_id=update.message.chat_id, text="question "+str(question_answered)+" answered")
+		if question_answered+1>6:
+			bot.send_message(chat_id=update.message.chat_id, text="This is the end of your TLT test.")
+		else: 
+			bot.send_voice(chat_id=update.message.chat_id, voice=open("tlt_audios/TLT_v5_1_question"+str(question_answered+1)+"_v1.ogg", "rb"))
+			bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
+
 
 	echo_handler = MessageHandler(Filters.text, echo)
 	dispatcher.add_handler(echo_handler)

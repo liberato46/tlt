@@ -27,7 +27,7 @@ def save_response(user_id, s3_url):
 			line_id=line.get('id')
 			question_number=line.get('fields').get("question")
 			try:
-				at.update('Table 1', line_id, {'question1url':s3_url, "question":question_number+1})
+				at.update('Table 1', line_id, {"question"+str(question_number+1)+"url":s3_url, "question":question_number+1})
 			except:
 				print("ERROR!!")
 			break
