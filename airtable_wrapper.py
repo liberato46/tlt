@@ -2,20 +2,25 @@ from airtable import airtable
 at=airtable.Airtable('appyKxEV736kAtWMk', 'key7dKLOWhsE8Lwtg')
 
 def associate(phone, user_id):
-	output_text="phone not found"
+	output_text=False 
 	lines=at.get('Table 1').get('records')
+	
 	for line in lines:
 		user_phone=line.get('fields').get('Cell phone #')
 		user_phone=user_phone.replace(' ', '')
 		user_phone=user_phone.replace('(', '')
 		user_phone=user_phone.replace(')', '')
+		user_phone=user_phone.replace('-', '')
+		user_phone=user_phone.replace('+', '')
+		user_phone=user_phone.replace('.', '')
+
 		if user_phone in phone:
 			line_id=line.get('id')
 			try:
 				at.update('Table 1', line_id, {'telegram_id':str(user_id)})
 			except:
 				print("ERROR!!")
-			output_text="phone found!"
+			output_text=True
 			break
 	return output_text
 
