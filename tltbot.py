@@ -62,7 +62,7 @@ try:
 	def voice(bot, update):
 		question=airtable_wrapper.get_question(update.message.from_user.id)
 		if question >=6:
-			bot.send_message(chat_id=update.message.chat_id, text="You have already finished your text.")
+			bot.send_message(chat_id=update.message.chat_id, text="You have already finished your test. Thank you!")
 		else: 
 			voice_id=update.message.voice.file_id
 			voice_file=bot.get_file(voice_id)
