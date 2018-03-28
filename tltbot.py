@@ -60,19 +60,23 @@ try:
 			bot.send_message(chat_id=update.message.chat_id, text="Phone NOT found", reply_markup=reply_markup)
 
 	def voice(bot, update):
-		voice_id=update.message.voice.file_id
-		voice_file=bot.get_file(voice_id)
-		voice_path="/tmp/voice-"+voice_id+".ogg"
-		print(voice_path)
-		voice_file.download(voice_path)
-		s3_url=bucket.upload_s3(voice_path, voice_id)
-		question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
-		bot.send_message(chat_id=update.message.chat_id, text="question "+str(question_answered)+" answered")
-		if question_answered+1>6:
-			bot.send_message(chat_id=update.message.chat_id, text="This is the end of your TLT test.")
+		question=airtable_wrapper.get_question(update.message.from_user.id)
+		if question >=6:
+			bot.send_message(chat_id=update.message.chat_id, text="You have already finished your text.")
 		else: 
-			bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
-			bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
+			voice_id=update.message.voice.file_id
+			voice_file=bot.get_file(voice_id)
+			voice_path="/tmp/voice-"+voice_id+".ogg"
+			print(voice_path)
+			voice_file.download(voice_path)
+			s3_url=bucket.upload_s3(voice_path, voice_id)
+			question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
+			bot.send_message(chat_id=update.message.chat_id, text="question "+str(question_answered)+" answered")
+			if question_answered+1>6:
+				bot.send_message(chat_id=update.message.chat_id, text="This is the end of your TLT test.")
+			else: 
+				bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
+				bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
 
 
 	echo_handler = MessageHandler(Filters.text, echo)
