@@ -48,8 +48,8 @@ try:
 		user_id=update.message.from_user.id
 		text=airtable_wrapper.associate(phone, user_id)
 		print(phone)
+		reply_markup=telegram.ReplyKeyboardRemove()
 		if text==True:
-			reply_markup=telegram.ReplyKeyboardRemove()
 			bot.send_message(chat_id=update.message.chat_id, text="Phone found", reply_markup=reply_markup)
 			bot.send_message(chat_id=update.message.chat_id, text="(1) Click on \"Play\" to listen to the test instructions")
 			bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
