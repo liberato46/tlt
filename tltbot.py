@@ -8,6 +8,7 @@ import json
 import bucket
 import datetime
 import airtable_wrapper
+import time
 
 from os.path import join,dirname
 from dotenv import load_dotenv
@@ -54,12 +55,14 @@ try:
 			#sending test instructions (below)
 			bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to the test instructions")
 			bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
+			time.sleep(5)
 			#sending example question
 			bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to an example question")
 			bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_v1.mp3", "rb"))
 			#sending example answer
 			bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to an example answer")
 			bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5_1_example_answer_v1.mp3", "rb"))
+			time.sleep(5)
 			#sending test questions
 			bot.send_message(chat_id=update.message.chat_id, text="Now click on \"Play\" to listen to Question 1")
 			bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
