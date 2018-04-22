@@ -26,6 +26,17 @@ updater=Updater(token=TOKEN)
 
 dispatcher=updater.dispatcher
 try:
+	def build_menu(buttons,
+               n_cols,
+               header_buttons=None,
+               footer_buttons=None):
+	    menu = [buttons[i:i + n_cols] for i in range(0, len(buttons), n_cols)]
+	    if header_buttons:
+	        menu.insert(0, header_buttons)
+	    if footer_buttons:
+	        menu.append(footer_buttons)
+	    return menu
+
 	def sound(bot, update):
 		bot.send_voice(chat_id=update.message.chat_id, voice=open("tlt_audios/TLT_v5_1_question1_v1.ogg", "rb"))
 
@@ -53,33 +64,31 @@ try:
 		if text==True:
 			bot.send_message(chat_id=update.message.chat_id, text="Phone found", reply_markup=reply_markup)
 			#sending test instructions (below)
-			bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to the test instructions")
+			#bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to the test instructions")
 			#bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
 			#text message below equals audio message from intro_v1.mp3
-			
 			button_list=[
 				InlineKeyboardButton("Next", callback_data="next_button")
 			]
 			reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
-			bot.send_message(chat_id=update.message.chat_id, text="", reply_markup=reply_markup)
-
+			bot.send_message(chat_id=update.message.chat_id, text="CLICK NEXT TO PROCEED", reply_markup=reply_markup)
 			#line below sends video tutorial with test instructions
 			# bot.send_video(chat_id=update.message.chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
 
-			bot.send_message(chat_id=update.message.chat_id, text="""Tourism English Language Test – TLT Test
-1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
-2)	Read and listen to the scenarios and what the guest says. Then take on the role of the hotel staff and answer the guest in English.
-3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
-4)	Use the voice recording feature in your computer or smart phone to record your answers. Then upload your recorded answer to each question""")
+			#bot.send_message(chat_id=update.message.chat_id, text="""Tourism English Language Test – TLT Test
+#1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
+#2)	Read and listen to the scenarios and what the guest says. Then take on the role of the hotel staff and answer the guest in English.
+#3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
+#4)	Use the voice recording feature in your computer or smart phone to record your answers. Then upload your recorded answer to each question""")
 
-			time.sleep(5)
+			#time.sleep(5)
 			#sending example question
-			bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to an example question and answer")
-			bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
+			#bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to an example question and answer")
+			#bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
 			#sending test questions
-			bot.send_message(chat_id=update.message.chat_id, text="Now click on \"Play\" to listen to Question 1")
-			bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
-			bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
+			#bot.send_message(chat_id=update.message.chat_id, text="Now click on \"Play\" to listen to Question 1")
+			#bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
+			#bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
 		else:
 			bot.send_message(chat_id=update.message.chat_id, text="Phone NOT found", reply_markup=reply_markup)
 
@@ -103,7 +112,21 @@ try:
 				bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
 
 	def next_button(bot, update):
+		print("1")
 		bot.send_video(chat_id=update.message.chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
+		bot.send_message(chat_id=update.message.chat_id, text="""Tourism English Language Test – TLT Test
+1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
+2)	Read and listen to the scenarios and what the guest says. Then take on the role of the hotel staff and answer the guest in English.
+3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
+4)	Use the voice recording feature in your computer or smart phone to record your answers. Then upload your recorded answer to each question""")
+		time.sleep(5)
+		#sending example question
+		bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to an example question and answer")
+		bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
+		#sending test questions
+		bot.send_message(chat_id=update.message.chat_id, text="Now click on \"Play\" to listen to Question 1")
+		bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
+		bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
 
 	echo_handler = MessageHandler(Filters.text, echo)
 	dispatcher.add_handler(echo_handler)
@@ -135,13 +158,4 @@ except Exception as e:
 	print(e)
 
 #Buttons to navigate test questions
-def build_menu(buttons,
-               n_cols,
-               header_buttons=None,
-               footer_buttons=None):
-    menu = [buttons[i:i + n_cols] for i in range(0, len(buttons), n_cols)]
-    if header_buttons:
-        menu.insert(0, header_buttons)
-    if footer_buttons:
-        menu.append(footer_buttons)
-    return menu
+
