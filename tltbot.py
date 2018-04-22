@@ -1,7 +1,7 @@
 #username:tltexambot
 from telegram.ext import CommandHandler
 from telegram.ext import Updater
-from telegram.ext import MessageHandler, Filters
+from telegram.ext import MessageHandler, Filters,CallbackQueryHandler
 import os 
 import requests
 import json
@@ -14,7 +14,7 @@ from os.path import join,dirname
 from dotenv import load_dotenv
 from welcome import welcome_message
 import telegram 
-from telegram import KeyboardButton,ReplyKeyboardMarkup
+from telegram import KeyboardButton,ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 from contacts import contacts_list
 env=os.environ.get("ENV", "development")
 if env=="development":
@@ -57,8 +57,14 @@ try:
 			#bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
 			#text message below equals audio message from intro_v1.mp3
 			
+			button_list=[
+				InlineKeyboardButton("Next", callback_data="next_button")
+			]
+			reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
+			bot.send_message(chat_id=update.message.chat_id, text="", reply_markup=reply_markup)
+
 			#line below sends video tutorial with test instructions
-			bot.send_video(chat_id=update.message.chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
+			# bot.send_video(chat_id=update.message.chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
 
 			bot.send_message(chat_id=update.message.chat_id, text="""Tourism English Language Test – TLT Test
 1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
@@ -96,6 +102,8 @@ try:
 				bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
 				bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
 
+	def next_button(bot, update):
+		bot.send_video(chat_id=update.message.chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
 
 	echo_handler = MessageHandler(Filters.text, echo)
 	dispatcher.add_handler(echo_handler)
@@ -112,6 +120,9 @@ try:
 	sound_handler = CommandHandler('sound', sound)
 	dispatcher.add_handler(sound_handler)
 
+	next_handler = CallbackQueryHandler(next_button)
+	dispatcher.add_handler(next_handler)
+
 	if env=="production":
 		PORT=int(os.environ.get("PORT"))
 		HEROKU_APP=os.environ.get("HEROKU_APP")
@@ -122,3 +133,15 @@ try:
 		updater.start_polling()
 except Exception as e:
 	print(e)
+
+#Buttons to navigate test questions
+def build_menu(buttons,
+               n_cols,
+               header_buttons=None,
+               footer_buttons=None):
+    menu = [buttons[i:i + n_cols] for i in range(0, len(buttons), n_cols)]
+    if header_buttons:
+        menu.insert(0, header_buttons)
+    if footer_buttons:
+        menu.append(footer_buttons)
+    return menu
