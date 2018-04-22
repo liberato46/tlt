@@ -113,12 +113,14 @@ try:
 
 	def next_button(bot, update):
 		print("1")
-		bot.send_video(chat_id=update.message.chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
+		bot.edit_message_text(chat_id=update.message.chat_id, text="LALALALALALA", message_id=update.message.message_id)
+		#bot.send_video(chat_id=update.message.chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
 		bot.send_message(chat_id=update.message.chat_id, text="""Tourism English Language Test – TLT Test
 1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
 2)	Read and listen to the scenarios and what the guest says. Then take on the role of the hotel staff and answer the guest in English.
 3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
 4)	Use the voice recording feature in your computer or smart phone to record your answers. Then upload your recorded answer to each question""")
+		print("2")
 		time.sleep(5)
 		#sending example question
 		bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to an example question and answer")
@@ -127,6 +129,10 @@ try:
 		bot.send_message(chat_id=update.message.chat_id, text="Now click on \"Play\" to listen to Question 1")
 		bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
 		bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
+
+	def error(bot, update, error):
+		print("ERROR"+str(update)+" by "+str(error))
+
 
 	echo_handler = MessageHandler(Filters.text, echo)
 	dispatcher.add_handler(echo_handler)
@@ -145,6 +151,8 @@ try:
 
 	next_handler = CallbackQueryHandler(next_button)
 	dispatcher.add_handler(next_handler)
+
+	dispatcher.add_error_handler(error)
 
 	if env=="production":
 		PORT=int(os.environ.get("PORT"))
