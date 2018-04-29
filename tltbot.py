@@ -118,6 +118,8 @@ try:
 
 		bot.send_video(chat_id=chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
 
+		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
+
 		bot.edit_message_text(message_id=message_id, chat_id=chat_id, text="""Tourism English Language Test – TLT Test
 1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
 2)	Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
