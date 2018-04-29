@@ -116,8 +116,6 @@ try:
 		message_id=update.callback_query.message.message_id
 		chat_id=update.callback_query.message.chat.id
 
-		bot.send_video(chat_id=chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
-
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
 
 		bot.edit_message_text(message_id=message_id, chat_id=chat_id, text="""Tourism English Language Test – TLT Test
@@ -125,6 +123,8 @@ try:
 2)	Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
 3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
+		
+		bot.send_video(chat_id=chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
 		
 		time.sleep(5)
 		#sending example question
