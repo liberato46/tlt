@@ -70,8 +70,6 @@ try:
 			]
 			reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
-			bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_before_you_start_v1", "rb"))
-
 			bot.send_message(chat_id=update.message.chat_id, text=""" BEFORE YOU START YOUR TEST: 
 
 				(1) Before you begin, make sure you have enough time to complete the test
