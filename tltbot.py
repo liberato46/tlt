@@ -135,7 +135,7 @@ try:
 		time.sleep(40)
 
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" below to listen to an example question and answer")
-		
+		time.sleep(20)
 		#sending example question
 		bot.send_message(chat_id=chat_id, text="""Example Question
 
