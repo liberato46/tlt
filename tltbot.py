@@ -131,7 +131,7 @@ try:
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
 
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
-		time.sleep(30)
+		time.sleep(50)
 
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" below to listen to an example question and answer")
 		
