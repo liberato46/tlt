@@ -91,6 +91,7 @@ try:
 				(9) If you exit the app before you complete your test, you will not receive a score
 """, reply_markup=reply_markup)
 
+			bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_before_you_start_v1", "rb"))
 			time.sleep(5)
 
 		else:
