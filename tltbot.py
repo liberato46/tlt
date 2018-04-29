@@ -113,7 +113,7 @@ try:
 				bot.send_message(chat_id=update.message.chat_id, text="This is the end of your TLT test. You may exit the TLT app now. Thank you!")
 			else: 
 				bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
-				bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
+				bot.send_message(chat_id=update.message.chat_id, text="Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
 
 	def next_button(bot, update):
 		message_id=update.callback_query.message.message_id
