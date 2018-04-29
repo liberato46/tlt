@@ -131,9 +131,10 @@ try:
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
 
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
-		time.sleep(10)
+		
+		time.sleep(40)
 
-		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
+		bot.send_message(chat_id=chat_id, text="Click on \"Play\" below to listen to an example question and answer")
 		
 		#sending example question
 		bot.send_message(chat_id=chat_id, text="""Example Question
@@ -146,12 +147,12 @@ You say: Sure. You will see two remote controls on the bedside table. Use the bl
 """)
 		
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
-		time.sleep(20)
+		time.sleep(40)
 
 		#sending test questions
 		bot.send_message(chat_id=chat_id, text="Now click on \"Play\" to listen to Question 1")
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
-		time.sleep(5)
+		time.sleep(20)
 		bot.send_message(chat_id=chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
 
 	def error(bot, update, error):
