@@ -64,32 +64,24 @@ try:
 		reply_markup=telegram.ReplyKeyboardRemove()
 		if text==True:
 			bot.send_message(chat_id=update.message.chat_id, text="Phone found", reply_markup=reply_markup)
-			#sending test instructions (below)
-			#bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to the test instructions")
-			#bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
-			#text message below equals audio message from intro_v1.mp3
+			
 			button_list=[
 				InlineKeyboardButton("Next", callback_data="next_button")
 			]
 			reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
-			bot.send_message(chat_id=update.message.chat_id, text="CLICK NEXT TO PROCEED", reply_markup=reply_markup)
-			#line below sends video tutorial with test instructions
-			# bot.send_video(chat_id=update.message.chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
 
-			#bot.send_message(chat_id=update.message.chat_id, text="""Tourism English Language Test – TLT Test
-#1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
-#2)	Read and listen to the scenarios and what the guest says. Then take on the role of the hotel staff and answer the guest in English.
-#3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
-#4)	Use the voice recording feature in your computer or smart phone to record your answers. Then upload your recorded answer to each question""")
+			bot.send_message(chat_id=update.message.chat_id, text=""" BEFORE YOU START YOUR TEST: 
+				(1) Before you begin, make sure you have enough time to complete the test
+				(2) Take the test in a quiet location away from distractions and outside noise
+				(3) Make sure that you will not receive any calls or notifications during th the test 
+				(4) Answer all questions smoothly and naturally in a clear and steady voice. 
+				(5) If you wish, bring your own headset and use it to block outside noise
+				(6) If you don’t know what to say in response to a question, press the audio record button and say "I don’t know”
+				(7) You cannot take notes during the test
+				(8) You may not pause the test once you have started it
+				(9) If you exit the app before you complete your test, you will not receive a score
+""", reply_markup=reply_markup)
 
-			#time.sleep(5)
-			#sending example question
-			#bot.send_message(chat_id=update.message.chat_id, text="Click on \"Play\" to listen to an example question and answer")
-			#bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
-			#sending test questions
-			#bot.send_message(chat_id=update.message.chat_id, text="Now click on \"Play\" to listen to Question 1")
-			#bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
-			#bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
 		else:
 			bot.send_message(chat_id=update.message.chat_id, text="Phone NOT found", reply_markup=reply_markup)
 
@@ -107,7 +99,7 @@ try:
 			question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
 			bot.send_message(chat_id=update.message.chat_id, text="question "+str(question_answered)+" answered")
 			if question_answered+1>6:
-				bot.send_message(chat_id=update.message.chat_id, text="This is the end of your TLT test.")
+				bot.send_message(chat_id=update.message.chat_id, text="This is the end of your TLT test. You may exit the TLT app now. Thank you!")
 			else: 
 				bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
 				bot.send_message(chat_id=update.message.chat_id, text="(3) Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
@@ -124,8 +116,9 @@ try:
 3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
 		
+		time.sleep(5)
 		bot.send_video(chat_id=chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
-		
+
 		time.sleep(5)
 		#sending example question
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
