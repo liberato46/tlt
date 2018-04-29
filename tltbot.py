@@ -119,20 +119,34 @@ try:
 		message_id=update.callback_query.message.message_id
 		chat_id=update.callback_query.message.chat.id
 
-		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
 
 		bot.send_message(chat_id=chat_id, text="""Tourism English Language Test – TLT Test
+
 1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
+
 2)	Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
+
 3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
+
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
 
-		time.sleep(5)
+		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
+		time.sleep(10)
 		
 		#sending example question
+		bot.send_message(chat_id=chat_id, text="""Example Question
+
+Scenario: A guest calls the front desk and wants to have access to the hotel’s cable TV.
+
+(Guest on the phone): Hi. I am trying to get access to the hotel’s cable TV, but I don’t know how. Can you help me?
+
+You say: Sure. You will see two remote controls on the bedside table. Use the black remote control to turn on the TV, and then use the gray remote control to activate our cable service.
+""")
+		
+
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
-		time.sleep(10)
+		time.sleep(20)
 
 		#sending test questions
 		bot.send_message(chat_id=chat_id, text="Now click on \"Play\" to listen to Question 1")
