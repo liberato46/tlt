@@ -82,6 +82,8 @@ try:
 				(9) If you exit the app before you complete your test, you will not receive a score
 """, reply_markup=reply_markup)
 
+			time.sleep(5)
+
 		else:
 			bot.send_message(chat_id=update.message.chat_id, text="Phone NOT found", reply_markup=reply_markup)
 
@@ -116,13 +118,17 @@ try:
 3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
 		
-		time.sleep(5)
+		time.sleep(10)
+
 		bot.send_video(chat_id=chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
 
 		time.sleep(5)
+		
 		#sending example question
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
+		time.sleep(5)
+
 		#sending test questions
 		bot.send_message(chat_id=chat_id, text="Now click on \"Play\" to listen to Question 1")
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
