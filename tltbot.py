@@ -70,15 +70,26 @@ try:
 			]
 			reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
+			bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_before_you_start_v1.mp3", "rb"))
+
 			bot.send_message(chat_id=update.message.chat_id, text=""" BEFORE YOU START YOUR TEST: 
+
 				(1) Before you begin, make sure you have enough time to complete the test
+
 				(2) Take the test in a quiet location away from distractions and outside noise
-				(3) Make sure that you will not receive any calls or notifications during th the test 
-				(4) Answer all questions smoothly and naturally in a clear and steady voice. 
+
+				(3) Make sure that you will not receive any calls or notifications during the test 
+
+				(4) Answer all questions naturally in a clear voice. 
+
 				(5) If you wish, bring your own headset and use it to block outside noise
+
 				(6) If you don’t know what to say in response to a question, press the audio record button and say "I don’t know”
+
 				(7) You cannot take notes during the test
+
 				(8) You may not pause the test once you have started it
+
 				(9) If you exit the app before you complete your test, you will not receive a score
 """, reply_markup=reply_markup)
 
@@ -119,10 +130,6 @@ try:
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
 		
 		time.sleep(10)
-
-		bot.send_video(chat_id=chat_id, video=open("tlt_audios/TLT_v5_1_tutorial_v1.mp4", "rb"))
-
-		time.sleep(5)
 		
 		#sending example question
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
