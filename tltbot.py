@@ -91,6 +91,7 @@ try:
 				(9) If you exit the app before you complete your test, you will not receive a score
 """, reply_markup=reply_markup)
 
+			time.sleep(5)
 
 		else:
 			bot.send_message(chat_id=update.message.chat_id, text="Phone NOT found", reply_markup=reply_markup)
@@ -125,7 +126,6 @@ try:
 2)	Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
 3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
-		
 
 		time.sleep(5)
 		
