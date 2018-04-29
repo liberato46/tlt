@@ -70,7 +70,7 @@ try:
 			]
 			reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
-			bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_before_you_start_v1.mp3", "rb"))
+			bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_before_you_start_v1", "rb"))
 
 			bot.send_message(chat_id=update.message.chat_id, text=""" BEFORE YOU START YOUR TEST: 
 
@@ -129,7 +129,8 @@ try:
 3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
 		
-		time.sleep(10)
+
+		time.sleep(5)
 		
 		#sending example question
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
