@@ -142,10 +142,11 @@ Scenario: A guest calls the front desk and wants to have access to the hotel’s
 
 You say: Sure. You will see two remote controls on the bedside table. Use the black remote control to turn on the TV, and then use the gray remote control to activate our cable service.
 """)
-		
-		bot.send_message(chat_id=chat_id, text="Click on \"Play\" below to listen to an example question and answer")
-		
+
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
+
+		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
+		
 		time.sleep(50)
 
 		#sending test questions
