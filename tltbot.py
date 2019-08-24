@@ -131,14 +131,10 @@ try:
 4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
 
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
-		reply_markup=telegram.ReplyKeyboardRemove()
-		bot.send_message(chat_id=chat_id, text="Click on 'Next' to proceed...", reply_markup=reply_markup)
-			
-		button_list=[
-			InlineKeyboardButton("Next", callback_data="next_button")
-		]
-		reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 		
+		bot.send_chat_action(chat_id=chat_id,action=telegram.ChatAction.TYPING)
+		time.sleep(50)
+
 		#sending example question
 		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_receptionist.jpg","rb"))
 		bot.send_message(chat_id=chat_id, text="""<b>Example Question</b>
