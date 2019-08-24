@@ -70,11 +70,11 @@ try:
 			]
 			reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
-			bot.send_message(chat_id=update.message.chat_id, text=""" BEFORE YOU START YOUR TEST: 
+			bot.send_message(chat_id=update.message.chat_id, text=""" 🖐BEFORE YOU START YOUR TEST: 
 
 				(1) Before you begin, make sure you have enough time to complete the test
 
-				(2) Take the test in a quiet location away from distractions and outside noise
+				‍(2) Take the test in a quiet location away from distractions and outside noise
 
 				(3) Make sure that you will not receive any calls or notifications during the test 
 
