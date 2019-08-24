@@ -135,14 +135,14 @@ try:
 		
 		#sending example question
 		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_receptionist.jpg","rb"))
-		bot.send_message(chat_id=chat_id, text="""Example Question
+		bot.send_message(chat_id=chat_id, text="""<b>Example Question</b>
 
 Scenario: A guest calls the front desk and wants to have access to the hotel’s cable TV.
 
 (Guest on the phone): Hi. I am trying to get access to the hotel’s cable TV, but I don’t know how. Can you help me?
 
 You say: Sure. You will see two remote controls on the bedside table. Use the black remote control to turn on the TV, and then use the gray remote control to activate our cable service.
-""")
+""", parse_mode=telegram.ParseMode.HTML)
 
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
 
