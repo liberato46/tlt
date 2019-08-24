@@ -91,7 +91,7 @@ try:
 				(9) If you exit the app before you complete your test, you will not receive a score
 """, reply_markup=reply_markup)
 
-			time.sleep(15)
+			time.sleep(10)
 
 		else:
 			bot.send_message(chat_id=update.message.chat_id, text="Phone NOT found", reply_markup=reply_markup)
@@ -135,7 +135,7 @@ try:
 		time.sleep(20)
 
 		#sending example question
-		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_receptionist.jpg","rb"))
+		
 		bot.send_message(chat_id=chat_id, text="""<b>Example Question</b>
 
 Scenario: A guest calls the front desk and wants to have access to the hotel’s cable TV.
@@ -145,16 +145,18 @@ Scenario: A guest calls the front desk and wants to have access to the hotel’s
 You say: Sure. You will see two remote controls on the bedside table. Use the black remote control to turn on the TV, and then use the gray remote control to activate our cable service.
 """, parse_mode=telegram.ParseMode.HTML)
 
+		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_receptionist.jpg","rb"))
+		
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
 
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
 		
-		time.sleep(20)
+		time.sleep(10)
 
 		#sending test questions
 		bot.send_message(chat_id=chat_id, text="Now click on \"Play\" to listen to Question 1")
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
-		time.sleep(20)
+		time.sleep(10)
 		bot.send_message(chat_id=chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
 
 	def error(bot, update, error):
