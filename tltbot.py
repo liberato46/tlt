@@ -74,7 +74,7 @@ try:
 
 				(1) Before you begin, make sure you have enough time to complete the test
 
-				‍(2) Take the test in a quiet location away from distractions and outside noise
+				(2) Take the test in a quiet location away from distractions and outside noise
 
 				(3) Make sure that you will not receive any calls or notifications during the test 
 
@@ -134,6 +134,7 @@ try:
 		time.sleep(45)
 		
 		#sending example question
+		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_receptionist.jpg","rb"))
 		bot.send_message(chat_id=chat_id, text="""Example Question
 
 Scenario: A guest calls the front desk and wants to have access to the hotel’s cable TV.
