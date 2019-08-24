@@ -155,6 +155,7 @@ You say: Sure. You will see two remote controls on the bedside table. Use the bl
 
 		#sending test questions
 		bot.send_message(chat_id=chat_id, text="Now click on \"Play\" to listen to Question 1")
+		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_wifi.jpeg","rb"))
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
 		time.sleep(10)
 		bot.send_message(chat_id=chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
