@@ -132,8 +132,7 @@ try:
 
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
 		
-		bot.send_chat_action(chat_id=chat_id,action=telegram.ChatAction.TYPING)
-		time.sleep(50)
+		time.sleep(30)
 
 		#sending example question
 		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_receptionist.jpg","rb"))
