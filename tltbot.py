@@ -46,7 +46,7 @@ try:
 		custom_keyboard=[[contact_keyboard]]
 		reply_markup=ReplyKeyboardMarkup(custom_keyboard, resize_keyboard=True)
 		bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5_1_welcome_v1.mp3", "rb"))
-		bot.send_message(chat_id=update.message.chat_id, text=welcome_message,reply_markup=reply_markup)
+		bot.send_message(chat_id=update.message.chat_id, text=welcome_message,reply_markup=reply_markup, parse_mode=telegram.ParseMode.HTML)
 
 	def echo(bot, update):
 		print(update.message.text)
@@ -63,7 +63,7 @@ try:
 		print(phone)
 		reply_markup=telegram.ReplyKeyboardRemove()
 		if text==True:
-			bot.send_message(chat_id=update.message.chat_id, text="Phone found", reply_markup=reply_markup)
+			bot.send_message(chat_id=update.message.chat_id, text="📞 Phone found", reply_markup=reply_markup, parse_mode=telegram.ParseMode.HTML)
 			
 			button_list=[
 				InlineKeyboardButton("Next", callback_data="next_button")
@@ -72,34 +72,34 @@ try:
 
 			bot.send_message(chat_id=update.message.chat_id, text=""" 🖐<b>BEFORE YOU START YOUR TEST:</b>
 
-				1️⃣ Before you begin, make sure you have enough time to complete the test
+				1️⃣  Before you begin, make sure you have enough time to complete the test
 
-				2️⃣ Take the test in a quiet location away from distractions and outside noise
+				2️⃣  Take the test in a quiet location away from distractions and outside noise
 
-				3️⃣ Make sure that you will not receive any calls or notifications during the test 
+				3️⃣  Make sure that you will not receive any calls or notifications during the test 
 
-				4️⃣ Answer all questions naturally in a clear voice. 
+				4️⃣  Answer all questions naturally in a clear voice. 
 
-				5️⃣ If you wish, bring your own headset and use it to block outside noise
+				5️⃣  If you wish, bring your own headset and use it to block outside noise
 
-				6️⃣ If you don’t know what to say in response to a question, press the audio record button and say "I don’t know”
+				6️⃣  If you don’t know what to say in response to a question, press the audio record button and say "I don’t know”
 
-				7️⃣ You cannot take notes during the test
+				7️⃣  You cannot take notes during the test
 
-				8️⃣ You may not pause the test once you have started it
+				8️⃣  You may not pause the test once you have started it
 
-				9️⃣ If you exit the app before you complete your test, you will not receive a score
+				9️⃣  If you exit the app before you complete your test, you will not receive a score
 """, reply_markup=reply_markup, parse_mode=telegram.ParseMode.HTML)
 
 			time.sleep(10)
 
-		else:
-			bot.send_message(chat_id=update.message.chat_id, text="Phone NOT found", reply_markup=reply_markup)
+		else: 
+			bot.send_message(chat_id=update.message.chat_id, text="⛔ Phone NOT found ⛔", reply_markup=reply_markup, parse_mode=telegram.ParseMode.HTML)
 
 	def voice(bot, update):
 		question=airtable_wrapper.get_question(update.message.from_user.id)
 		if question >=6:
-			bot.send_message(chat_id=update.message.chat_id, text="You have already finished your test. Thank you!")
+			bot.send_message(chat_id=update.message.chat_id, text="You have already finished your test. Thank you!", parse_mode=telegram.ParseMode.HTML)
 		else: 
 			voice_id=update.message.voice.file_id
 			voice_file=bot.get_file(voice_id)
@@ -110,7 +110,7 @@ try:
 			question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
 			bot.send_message(chat_id=update.message.chat_id, text="question "+str(question_answered)+" answered")
 			if question_answered+1>6:
-				bot.send_message(chat_id=update.message.chat_id, text="This is the end of your TLT test. You may exit the TLT app now. Thank you!")
+				bot.send_message(chat_id=update.message.chat_id, text="🏆 This is the end of your TLT test 🏆. You may exit the TLT app now. Thank you!  🤗", parse_mode=telegram.ParseMode.HTML)
 			else: 
 				bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
 				bot.send_message(chat_id=update.message.chat_id, text="Now click on \"Record\" to record your answer to Question "+str(question_answered+1))
@@ -122,13 +122,13 @@ try:
 
 		bot.send_message(chat_id=chat_id, text="""✈️🇺🇸 <b>Tourism English Language Test – TLT Test</b>
 
-1️⃣	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
+1️⃣	 In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
 
-2️⃣	Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
+2️⃣	 Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
 
-3️⃣	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
+3️⃣	 You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
 
-4️⃣	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""", parse_mode=telegram.ParseMode.HTML)
+4️⃣	 Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""", parse_mode=telegram.ParseMode.HTML)
 
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
 		

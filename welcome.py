@@ -1,7 +1,7 @@
 welcome_message="""
-Welcome to the Tourism English Language Test (TLT Test)
+Welcome to the ✈️🇺🇸 <b>Tourism English Language Test – TLT Test</b>
 
-*Please click on 'Send my Phone Number' below to send your phone number and start your test.*
+*Please click on <b>'Send my Phone Number'</b> below to send your phone number and start your test.*
 
 """
 
