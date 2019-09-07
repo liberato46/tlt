@@ -126,7 +126,7 @@ You may exit the TLT app now. Thank you!  🤗""", parse_mode=telegram.ParseMode
 
 		bot.send_message(chat_id=chat_id, text="""✈️🇺🇸 <b>Tourism English Language Test – TLT Test</b>
 
-1️⃣	 👩🏽‍💼 You will hear several scenarios where a hotel front desk staff member responds to a guest.
+1️⃣	 👩🏽 You will hear several scenarios where a hotel front desk staff member responds to a guest.
 
 2️⃣	 🛎️ Take on the role of a front desk staff member and answer the guest in English.
 
