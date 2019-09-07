@@ -113,9 +113,10 @@ try:
 				bot.send_message(chat_id=update.message.chat_id, text="""🏆 This is the end of your TLT test 🏆. 
 You may exit the TLT app now. Thank you!  🤗""", parse_mode=telegram.ParseMode.HTML)
 			else: 
-				bot.send_message(chat_id=update.message.chat_id, text="Now click on ▶️ <b>\"Play\"</b> to listen to Question "+str(question_answered+1), parse_mode=telegram.ParseMode.HTML)
+				bot.send_message(chat_id=update.message.chat_id, text="Now click on ▶️ <b>\"Play\"</b> to listen to <b>Question "+str(question_answered+1)+"</b>", parse_mode=telegram.ParseMode.HTML)
 				bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
-				bot.send_message(chat_id=update.message.chat_id, text="Now click on 🎙️ <b>\"Record\"</b> to record your answer to Question "+str(question_answered+1), parse_mode=telegram.ParseMode.HTML)
+				time.sleep(10)
+				bot.send_message(chat_id=update.message.chat_id, text="Now click on 🎙️ <b>\"Record\"</b> to record your answer to <b>Question "+str(question_answered+1)+"</b>", parse_mode=telegram.ParseMode.HTML)
 
 	def next_button(bot, update):
 		message_id=update.callback_query.message.message_id
@@ -149,17 +150,16 @@ You may exit the TLT app now. Thank you!  🤗""", parse_mode=telegram.ParseMode
 
 		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_receptionist.jpg","rb"))
 		
-		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
-
 		bot.send_message(chat_id=chat_id, text="Click on ▶️ <b>\"Play\"</b> to listen to an example question and answer", parse_mode=telegram.ParseMode.HTML)
+		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
 
 		#sending test questions
 		time.sleep(30)
-		bot.send_message(chat_id=chat_id, text="Now click on ▶️ <b>\"Play\"</b> to listen to Question 1", parse_mode=telegram.ParseMode.HTML)
+		bot.send_message(chat_id=chat_id, text="Now click on ▶️ <b>\"Play\"</b> to listen to <b>Question 1</b>", parse_mode=telegram.ParseMode.HTML)
 		time.sleep(10)
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
 		time.sleep(10)
-		bot.send_message(chat_id=chat_id, text="Now click on 🎙 <b>\"Record\"</b> to record your answer to Question 1", parse_mode=telegram.ParseMode.HTML)
+		bot.send_message(chat_id=chat_id, text="Now click on 🎙 <b>\"Record\"</b> to record your answer to <b>Question 1</b>", parse_mode=telegram.ParseMode.HTML)
 
 	def error(bot, update, error):
 		print("ERROR"+str(update)+" by "+str(error))
