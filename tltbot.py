@@ -110,9 +110,10 @@ try:
 			question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
 			bot.send_message(chat_id=update.message.chat_id, text="<b>Question "+str(question_answered)+" answered</b> 👍", parse_mode=telegram.ParseMode.HTML)
 			if question_answered+1>6:
-				bot.send_message(chat_id=update.message.chat_id, text="""🏆 This is the end of your TLT test 🏆. 
+				bot.send_message(chat_id=update.message.chat_id, text="""🏆 TLT test <b>finished</b> 🏆. 
 You may exit the TLT app now. Thank you!  🤗""", parse_mode=telegram.ParseMode.HTML)
 			else: 
+				bot.send_photo(chat_id=update.message.chat_id, photo=open("images/image_"+str(question_answered+1)+".jpg","rb"))
 				bot.send_message(chat_id=update.message.chat_id, text="Now click on ▶️ <b>\"Play\"</b> to listen to <b>Question "+str(question_answered+1)+"</b>", parse_mode=telegram.ParseMode.HTML)
 				bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
 				time.sleep(3)
@@ -155,6 +156,7 @@ You may exit the TLT app now. Thank you!  🤗""", parse_mode=telegram.ParseMode
 
 		#sending test questions
 		time.sleep(10)
+		bot.send_photo(chat_id=chat_id, photo=open("images/image_1.jpg","rb"))
 		bot.send_message(chat_id=chat_id, text="Now click on ▶️ <b>\"Play\"</b> to listen to <b>Question 1</b>", parse_mode=telegram.ParseMode.HTML)
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
 		time.sleep(3)
