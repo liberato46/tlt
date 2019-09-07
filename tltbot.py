@@ -110,8 +110,10 @@ try:
 			question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
 			bot.send_message(chat_id=update.message.chat_id, text="<b>Question "+str(question_answered)+" answered</b> 👍", parse_mode=telegram.ParseMode.HTML)
 			if question_answered+1>6:
-				bot.send_message(chat_id=update.message.chat_id, text="🏆 This is the end of your TLT test 🏆. You may exit the TLT app now. Thank you!  🤗", parse_mode=telegram.ParseMode.HTML)
+				bot.send_message(chat_id=update.message.chat_id, text="""🏆 This is the end of your TLT test 🏆. 
+You may exit the TLT app now. Thank you!  🤗""", parse_mode=telegram.ParseMode.HTML)
 			else: 
+				bot.send_message(chat_id=update.message.chat_id, text="Now click on ▶️ <b>\"Play\"</b> to listen to Question "+str(question_answered+1), parse_mode=telegram.ParseMode.HTML)
 				bot.send_audio(chat_id=update.message.chat_id, audio=open("tlt_audios/TLT_v5.1_question"+str(question_answered+1)+"_v1.mp3", "rb"))
 				bot.send_message(chat_id=update.message.chat_id, text="Now click on 🎙️ <b>\"Record\"</b> to record your answer to Question "+str(question_answered+1), parse_mode=telegram.ParseMode.HTML)
 
@@ -138,11 +140,11 @@ try:
 		
 		bot.send_message(chat_id=chat_id, text="""<b>Example Question</b>
 
-Scenario: A guest calls the front desk and wants to have access to the hotel’s cable TV.
+<b>Scenario:</b> A guest calls the front desk and wants to have access to the hotel’s cable TV.
 
-(Guest on the phone): Hi. I am trying to get access to the hotel’s cable TV, but I don’t know how. Can you help me?
+<b>(Guest on the phone):</b> Hi. I am trying to get access to the hotel’s cable TV, but I don’t know how. Can you help me?
 
-You say: Sure. You will see two remote controls on the bedside table. Use the black remote control to turn on the TV, and then use the gray remote control to activate our cable service.
+<b>You say:</b> Sure. You will see two remote controls on the bedside table. Use the black remote control to turn on the TV, and then use the gray remote control to activate our cable service.
 """, parse_mode=telegram.ParseMode.HTML)
 
 		bot.send_photo(chat_id=chat_id, photo=open("images/hotel_receptionist.jpg","rb"))
