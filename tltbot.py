@@ -70,26 +70,26 @@ try:
 			]
 			reply_markup=InlineKeyboardMarkup(build_menu(button_list, n_cols=1))
 
-			bot.send_message(chat_id=update.message.chat_id, text=""" 🖐BEFORE YOU START YOUR TEST: 
+			bot.send_message(chat_id=update.message.chat_id, text=""" 🖐<b>BEFORE YOU START YOUR TEST:</b>
 
-				(1) Before you begin, make sure you have enough time to complete the test
+				1️⃣ Before you begin, make sure you have enough time to complete the test
 
-				(2) Take the test in a quiet location away from distractions and outside noise
+				2️⃣ Take the test in a quiet location away from distractions and outside noise
 
-				(3) Make sure that you will not receive any calls or notifications during the test 
+				3️⃣ Make sure that you will not receive any calls or notifications during the test 
 
-				(4) Answer all questions naturally in a clear voice. 
+				4️⃣ Answer all questions naturally in a clear voice. 
 
-				(5) If you wish, bring your own headset and use it to block outside noise
+				5️⃣ If you wish, bring your own headset and use it to block outside noise
 
-				(6) If you don’t know what to say in response to a question, press the audio record button and say "I don’t know”
+				6️⃣ If you don’t know what to say in response to a question, press the audio record button and say "I don’t know”
 
-				(7) You cannot take notes during the test
+				7️⃣ You cannot take notes during the test
 
-				(8) You may not pause the test once you have started it
+				8️⃣ You may not pause the test once you have started it
 
-				(9) If you exit the app before you complete your test, you will not receive a score
-""", reply_markup=reply_markup)
+				9️⃣ If you exit the app before you complete your test, you will not receive a score
+""", reply_markup=reply_markup, parse_mode=telegram.ParseMode.HTML)
 
 			time.sleep(10)
 
@@ -120,15 +120,15 @@ try:
 		chat_id=update.callback_query.message.chat.id
 
 
-		bot.send_message(chat_id=chat_id, text="""Tourism English Language Test – TLT Test
+		bot.send_message(chat_id=chat_id, text="""✈️🇺🇸 <b>Tourism English Language Test – TLT Test</b>
 
-1)	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
+1️⃣	In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
 
-2)	Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
+2️⃣	Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
 
-3)	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
+3️⃣	You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
 
-4)	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""")
+4️⃣	Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""", parse_mode=telegram.ParseMode.HTML)
 
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
 		
@@ -150,10 +150,9 @@ You say: Sure. You will see two remote controls on the bedside table. Use the bl
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
 
 		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
-		
-		time.sleep(10)
 
 		#sending test questions
+		time.sleep(30)
 		bot.send_message(chat_id=chat_id, text="Now click on \"Play\" to listen to Question 1")
 		time.sleep(10)
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
