@@ -108,7 +108,7 @@ try:
 			voice_file.download(voice_path)
 			s3_url=bucket.upload_s3(voice_path, voice_id)
 			question_answered=airtable_wrapper.save_response(update.message.from_user.id, s3_url)
-			bot.send_message(chat_id=update.message.chat_id, text="question "+str(question_answered)+" answered")
+			bot.send_message(chat_id=update.message.chat_id, text="<b>Question "+str(question_answered)+" answered</b> 👍", parse_mode=telegram.ParseMode.HTML)
 			if question_answered+1>6:
 				bot.send_message(chat_id=update.message.chat_id, text="🏆 This is the end of your TLT test 🏆. You may exit the TLT app now. Thank you!  🤗", parse_mode=telegram.ParseMode.HTML)
 			else: 
@@ -149,15 +149,15 @@ You say: Sure. You will see two remote controls on the bedside table. Use the bl
 		
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5_1_example_question_and_answer_v1.mp3", "rb"))
 
-		bot.send_message(chat_id=chat_id, text="Click on \"Play\" to listen to an example question and answer")
+		bot.send_message(chat_id=chat_id, text="Click on ▶️ <b>\"Play\"</b> to listen to an example question and answer", parse_mode=telegram.ParseMode.HTML)
 
 		#sending test questions
 		time.sleep(30)
-		bot.send_message(chat_id=chat_id, text="Now click on \"Play\" to listen to Question 1")
+		bot.send_message(chat_id=chat_id, text="Now click on ▶️ <b>\"Play\"</b> to listen to Question 1", parse_mode=telegram.ParseMode.HTML)
 		time.sleep(10)
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_question1_v1.mp3", "rb"))
 		time.sleep(10)
-		bot.send_message(chat_id=chat_id, text="(3) Now click on \"Record\" to record your answer to Question 1")
+		bot.send_message(chat_id=chat_id, text="(3) Now click on 🎙 <b>\"Record\"</b> to record your answer to Question 1", parse_mode=telegram.ParseMode.HTML)
 
 	def error(bot, update, error):
 		print("ERROR"+str(update)+" by "+str(error))
