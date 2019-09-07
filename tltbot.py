@@ -72,23 +72,23 @@ try:
 
 			bot.send_message(chat_id=update.message.chat_id, text=""" 🖐<b>BEFORE YOU START YOUR TEST:</b>
 
-				1️⃣  Before you begin, make sure you have enough time to complete the test
+				1️⃣  🕑 Make sure you have enough time to complete the test
 
-				2️⃣  Take the test in a quiet location away from distractions and outside noise
+				2️⃣  🔈 Take the test in a quiet location 
 
-				3️⃣  Make sure that you will not receive any calls or notifications during the test 
+				3️⃣  📵 You cannot receive any calls or notifications during the test 
 
-				4️⃣  Answer all questions naturally in a clear voice. 
+				4️⃣  🗣️ Answer all questions naturally in a clear voice. 
 
-				5️⃣  If you wish, bring your own headset and use it to block outside noise
+				5️⃣  🎧 Bring your own headset and use it to take the test
 
-				6️⃣  If you don’t know what to say in response to a question, press the audio record button and say "I don’t know”
+				6️⃣  🤷‍♂️ If you don’t know what the answer to a question, simply record "I don’t know”
 
-				7️⃣  You cannot take notes during the test
+				7️⃣  📝 You cannot take notes during the test
 
-				8️⃣  You may not pause the test once you have started it
+				8️⃣  ⏸️ Do not pause the test once you have started it
 
-				9️⃣  If you exit the app before you complete your test, you will not receive a score
+				9️⃣  🔚 If you exit the app before you complete your test, you will not receive a score
 """, reply_markup=reply_markup, parse_mode=telegram.ParseMode.HTML)
 
 			time.sleep(10)
@@ -126,13 +126,11 @@ You may exit the TLT app now. Thank you!  🤗""", parse_mode=telegram.ParseMode
 
 		bot.send_message(chat_id=chat_id, text="""✈️🇺🇸 <b>Tourism English Language Test – TLT Test</b>
 
-1️⃣	 In this test, you will be presented with several scenarios where a hotel front desk staff member responds to a guest.
+1️⃣	 👩🏽‍💼 You will hear several scenarios where a hotel front desk staff member responds to a guest.
 
-2️⃣	 Read and listen to the scenarios. Then listen to what the guest says. Take on the role of a front desk staff member and answer the guest in English.
+2️⃣	 🛎️ Take on the role of a front desk staff member and answer the guest in English.
 
-3️⃣	 You should answer the guest in a manner that is appropriate for a hotel front desk work situation.
-
-4️⃣	 Use the voice recording feature in Telegram to record your answer. Then upload your recorded answer to each question""", parse_mode=telegram.ParseMode.HTML)
+3️⃣	 🎙️ Use the voice recording feature in Telegram to record your answer. """, parse_mode=telegram.ParseMode.HTML)
 
 		bot.send_audio(chat_id=chat_id, audio=open("tlt_audios/TLT_v5.1_intro_v1.mp3", "rb"))
 		
