@@ -1,5 +1,5 @@
 python-dotenv==0.7.1
 python-telegram-bot==9.0.0
-requests==2.18.4
+requests==2.20.0
 boto3==1.5.3
 airtable==0.3.1
